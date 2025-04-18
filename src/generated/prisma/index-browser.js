@@ -127,6 +127,12 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.SessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  expiresAt: 'expiresAt'
+};
+
 exports.Prisma.BrandScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -233,6 +239,7 @@ exports.StatusOrder = exports.$Enums.StatusOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  Session: 'Session',
   Brand: 'Brand',
   Category: 'Category',
   Location: 'Location',

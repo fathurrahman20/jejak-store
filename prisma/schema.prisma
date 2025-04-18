@@ -29,10 +29,21 @@ model User {
 
   Order Order[]
 
+  // Auth Lucia
+  Session Session[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@map("users")
+}
+
+model Session {
+  id        String   @id
+  userId    String
+  expiresAt DateTime
+
+  user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
 }
 
 model Brand {
