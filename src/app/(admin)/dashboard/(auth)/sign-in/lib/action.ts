@@ -12,8 +12,6 @@ export async function SignIn(
   _: unknown,
   formData: FormData
 ): Promise<ActionResult> {
-  console.log(formData.get("email"));
-
   const validate = schemaSignIn.safeParse({
     email: formData.get("email") as string,
     password: formData.get("password") as string,
