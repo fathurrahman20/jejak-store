@@ -20,7 +20,7 @@ export const columns: ColumnDef<Category>[] = [
         <div className="space-x-4 inline-flex">
           <Button size="sm" asChild>
             <Link
-              href="{`/dashboard/categories/edit/${category.id}`}"
+              href={`/dashboard/categories/edit/${category.id}`}
               className="text-white">
               <Edit className="w-4 h-4 mr-2" /> Edit
             </Link>
