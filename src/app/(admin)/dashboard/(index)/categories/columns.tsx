@@ -3,8 +3,9 @@
 import { Button } from "@/components/ui/button";
 import { Category } from "@/generated/prisma";
 import { ColumnDef } from "@tanstack/react-table";
-import { Edit, Trash } from "lucide-react";
+import { Edit } from "lucide-react";
 import Link from "next/link";
+import FormDelete from "./_component/form-delete";
 
 export const columns: ColumnDef<Category>[] = [
   {
@@ -25,13 +26,7 @@ export const columns: ColumnDef<Category>[] = [
               <Edit className="w-4 h-4 mr-2" /> Edit
             </Link>
           </Button>
-          <Button size="sm" asChild variant="destructive">
-            <Link
-              href={`/dashboard/categories/delete/${category.id}`}
-              className="text-white">
-              <Trash className="w-4 h-4 mr-2" /> Delete
-            </Link>
-          </Button>
+          <FormDelete id={category.id} />
         </div>
       );
     },
