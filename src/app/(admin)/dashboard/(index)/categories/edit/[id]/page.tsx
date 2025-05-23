@@ -3,16 +3,12 @@ import { redirect } from "next/navigation";
 import FormCategory from "../../_component/form-category";
 import { getCategoryById } from "../../lib/data";
 
-type Tparams = {
-  id: string;
-};
-
-interface EditPageProp {
-  params: Tparams;
+interface EditPageProps {
+  params: Promise<{ id: string }>;
 }
 
-export default async function EditPage({ params }: EditPageProp) {
-  const { id } = params;
+export default async function EditPage({ params }: EditPageProps) {
+  const id = (await params).id;
   const data = await getCategoryById(id);
 
   if (!data) {
