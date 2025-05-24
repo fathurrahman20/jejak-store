@@ -4,7 +4,7 @@ import { schemaBrand } from "@/lib/schema";
 import { redirect } from "next/navigation";
 import prisma from "../../../../../../../lib/prisma";
 import { ActionResult } from "@/types";
-import { uploadFile } from "@/lib/supabase";
+import { deleteFile, uploadFile } from "@/lib/supabase";
 
 export async function postBrand(_: unknown, formData: FormData) {
   const validate = schemaBrand.safeParse({
@@ -54,7 +54,9 @@ export async function updateBrand(
   id: string | undefined,
   slug: string | undefined
 ) {
-  const validate = schemaBrand.safeParse({
+  const fileUpload = formData.get("image") as File;
+
+  const validate = schemaBrand.pick({ name: true }).safeParse({
     name: formData.get("name"),
   });
 
@@ -64,47 +66,65 @@ export async function updateBrand(
     };
   }
 
+  const checkDuplicate = await prisma.brand.findUnique({
+    where: { slug: validate.data.name.toLowerCase() },
+  });
+
+  //  return error if name has duplicate, but no error if slug === current slug
+  if (checkDuplicate && checkDuplicate.slug !== slug) {
+    return {
+      error: "Brand already exists",
+    };
+  }
+
+  const brand = await prisma.brand.findUnique({
+    where: { id },
+    select: { logo_url: true },
+  });
+
+  let fileName = brand?.logo_url;
+
+  //   check if user upload/change new brand logo
+  if (fileUpload.size > 0) {
+    await deleteFile(brand?.logo_url);
+    fileName = await uploadFile(fileUpload);
+  }
+
   try {
-    const checkDuplicate = await prisma.category.findUnique({
-      where: { slug: validate.data.name.toLowerCase() },
-    });
-
-    //  return error if name has duplicate, but no error if slug === current slug
-    if (checkDuplicate && checkDuplicate.slug !== slug) {
-      return {
-        error: "Category already exists",
-      };
-    }
-
-    await prisma.category.update({
+    await prisma.brand.update({
       where: { id },
       data: {
         name: validate.data.name,
+        logo_url: fileName,
         slug: validate.data.name.toLowerCase(),
       },
     });
   } catch (error) {
     console.log(error);
-    return redirect("/dashboard/categories");
+    return {
+      error: "Failed to update brand",
+    };
   }
 
-  return redirect("/dashboard/categories");
+  return redirect("/dashboard/brands");
 }
 
-export async function deleteCategory(
+export async function deleteBrand(
   _: unknown,
   formData: FormData,
   id: string
 ): Promise<ActionResult> {
   try {
-    const checkCategory = await prisma.category.findUnique({ where: { id } });
-    if (!checkCategory) {
+    const checkBrand = await prisma.brand.findUnique({ where: { id } });
+    if (!checkBrand) {
       return {
-        error: "Category not found!",
+        error: "Brand not found!",
       };
     }
 
-    await prisma.category.delete({
+    await deleteFile(checkBrand.logo_url);
+
+    await prisma.brand.delete({
       where: {
         id,
       },
@@ -116,5 +136,5 @@ export async function deleteCategory(
     };
   }
 
-  return redirect("/dashboard/categories");
+  return redirect("/dashboard/brands");
 }
