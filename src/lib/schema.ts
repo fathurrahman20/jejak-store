@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+export const ALLOW_MIME_TYPES = ["image/jpg", "image/jpeg", "image/png"];
+
 export const schemaSignIn = z.object({
   email: z
     .string({ required_error: "Email is required" })
@@ -16,3 +18,12 @@ export const schemaCategory = z.object({
 });
 
 export const schemaLocation = schemaCategory.extend({});
+
+export const schemaBrand = schemaCategory.extend({
+  image: z
+    .any()
+    .refine((file: File) => ALLOW_MIME_TYPES.includes(file.type), {
+      message: "File is not valid",
+    })
+    .refine((file: File) => file.name, { message: "Image is required" }),
+});
