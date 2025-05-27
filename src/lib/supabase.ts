@@ -17,7 +17,7 @@ export const getImageUrl = (
 
 export const uploadFile = async (
   file: File,
-  path: "brands" | "product" = "brands"
+  path: "brands" | "products" = "brands"
 ) => {
   const fileType = file.type.split("/")[1];
   const fileName = `${path}-${Date.now()}.${fileType}`;
@@ -34,7 +34,7 @@ export const uploadFile = async (
 
 export const deleteFile = async (
   fileName: string | undefined,
-  path: "brands" | "product" = "brands"
+  path: "brands" | "products" = "brands"
 ) => {
   const name = fileName;
 

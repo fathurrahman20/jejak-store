@@ -7243,7 +7243,6 @@ export namespace Prisma {
     description: string | null
     price: bigint | null
     stock: $Enums.ProductStock | null
-    imageUrl: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -7258,7 +7257,6 @@ export namespace Prisma {
     description: string | null
     price: bigint | null
     stock: $Enums.ProductStock | null
-    imageUrl: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -7298,7 +7296,6 @@ export namespace Prisma {
     description?: true
     price?: true
     stock?: true
-    imageUrl?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -7313,7 +7310,6 @@ export namespace Prisma {
     description?: true
     price?: true
     stock?: true
-    imageUrl?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -7430,7 +7426,7 @@ export namespace Prisma {
     description: string
     price: bigint
     stock: $Enums.ProductStock
-    imageUrl: string
+    imageUrl: string[]
     createdAt: Date
     updatedAt: Date
     _count: ProductCountAggregateOutputType | null
@@ -7562,7 +7558,7 @@ export namespace Prisma {
       description: string
       price: bigint
       stock: $Enums.ProductStock
-      imageUrl: string
+      imageUrl: string[]
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["product"]>
@@ -8001,7 +7997,7 @@ export namespace Prisma {
     readonly description: FieldRef<"Product", 'String'>
     readonly price: FieldRef<"Product", 'BigInt'>
     readonly stock: FieldRef<"Product", 'ProductStock'>
-    readonly imageUrl: FieldRef<"Product", 'String'>
+    readonly imageUrl: FieldRef<"Product", 'String[]'>
     readonly createdAt: FieldRef<"Product", 'DateTime'>
     readonly updatedAt: FieldRef<"Product", 'DateTime'>
   }
@@ -12436,7 +12432,7 @@ export namespace Prisma {
     description?: StringFilter<"Product"> | string
     price?: BigIntFilter<"Product"> | bigint | number
     stock?: EnumProductStockFilter<"Product"> | $Enums.ProductStock
-    imageUrl?: StringFilter<"Product"> | string
+    imageUrl?: StringNullableListFilter<"Product">
     createdAt?: DateTimeFilter<"Product"> | Date | string
     updatedAt?: DateTimeFilter<"Product"> | Date | string
     brand?: XOR<BrandScalarRelationFilter, BrandWhereInput>
@@ -12477,7 +12473,7 @@ export namespace Prisma {
     description?: StringFilter<"Product"> | string
     price?: BigIntFilter<"Product"> | bigint | number
     stock?: EnumProductStockFilter<"Product"> | $Enums.ProductStock
-    imageUrl?: StringFilter<"Product"> | string
+    imageUrl?: StringNullableListFilter<"Product">
     createdAt?: DateTimeFilter<"Product"> | Date | string
     updatedAt?: DateTimeFilter<"Product"> | Date | string
     brand?: XOR<BrandScalarRelationFilter, BrandWhereInput>
@@ -12519,7 +12515,7 @@ export namespace Prisma {
     description?: StringWithAggregatesFilter<"Product"> | string
     price?: BigIntWithAggregatesFilter<"Product"> | bigint | number
     stock?: EnumProductStockWithAggregatesFilter<"Product"> | $Enums.ProductStock
-    imageUrl?: StringWithAggregatesFilter<"Product"> | string
+    imageUrl?: StringNullableListFilter<"Product">
     createdAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
   }
@@ -13060,7 +13056,7 @@ export namespace Prisma {
     description: string
     price: bigint | number
     stock: $Enums.ProductStock
-    imageUrl: string
+    imageUrl?: ProductCreateimageUrlInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     brand: BrandCreateNestedOneWithoutProductInput
@@ -13079,7 +13075,7 @@ export namespace Prisma {
     description: string
     price: bigint | number
     stock: $Enums.ProductStock
-    imageUrl: string
+    imageUrl?: ProductCreateimageUrlInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     OrderProduct?: OrderProductUncheckedCreateNestedManyWithoutProductInput
@@ -13092,7 +13088,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     price?: BigIntFieldUpdateOperationsInput | bigint | number
     stock?: EnumProductStockFieldUpdateOperationsInput | $Enums.ProductStock
-    imageUrl?: StringFieldUpdateOperationsInput | string
+    imageUrl?: ProductUpdateimageUrlInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneRequiredWithoutProductNestedInput
@@ -13111,7 +13107,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     price?: BigIntFieldUpdateOperationsInput | bigint | number
     stock?: EnumProductStockFieldUpdateOperationsInput | $Enums.ProductStock
-    imageUrl?: StringFieldUpdateOperationsInput | string
+    imageUrl?: ProductUpdateimageUrlInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     OrderProduct?: OrderProductUncheckedUpdateManyWithoutProductNestedInput
@@ -13127,7 +13123,7 @@ export namespace Prisma {
     description: string
     price: bigint | number
     stock: $Enums.ProductStock
-    imageUrl: string
+    imageUrl?: ProductCreateimageUrlInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -13139,7 +13135,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     price?: BigIntFieldUpdateOperationsInput | bigint | number
     stock?: EnumProductStockFieldUpdateOperationsInput | $Enums.ProductStock
-    imageUrl?: StringFieldUpdateOperationsInput | string
+    imageUrl?: ProductUpdateimageUrlInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13154,7 +13150,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     price?: BigIntFieldUpdateOperationsInput | bigint | number
     stock?: EnumProductStockFieldUpdateOperationsInput | $Enums.ProductStock
-    imageUrl?: StringFieldUpdateOperationsInput | string
+    imageUrl?: ProductUpdateimageUrlInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13645,6 +13641,14 @@ export namespace Prisma {
     not?: NestedEnumProductStockFilter<$PrismaModel> | $Enums.ProductStock
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type BrandScalarRelationFilter = {
     is?: BrandWhereInput
     isNot?: BrandWhereInput
@@ -13699,7 +13703,6 @@ export namespace Prisma {
     description?: SortOrder
     price?: SortOrder
     stock?: SortOrder
-    imageUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -13714,7 +13717,6 @@ export namespace Prisma {
     description?: SortOrder
     price?: SortOrder
     stock?: SortOrder
-    imageUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -14199,6 +14201,10 @@ export namespace Prisma {
     deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
   }
 
+  export type ProductCreateimageUrlInput = {
+    set: string[]
+  }
+
   export type BrandCreateNestedOneWithoutProductInput = {
     create?: XOR<BrandCreateWithoutProductInput, BrandUncheckedCreateWithoutProductInput>
     connectOrCreate?: BrandCreateOrConnectWithoutProductInput
@@ -14241,6 +14247,11 @@ export namespace Prisma {
 
   export type EnumProductStockFieldUpdateOperationsInput = {
     set?: $Enums.ProductStock
+  }
+
+  export type ProductUpdateimageUrlInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type BrandUpdateOneRequiredWithoutProductNestedInput = {
@@ -14828,7 +14839,7 @@ export namespace Prisma {
     description: string
     price: bigint | number
     stock: $Enums.ProductStock
-    imageUrl: string
+    imageUrl?: ProductCreateimageUrlInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     category: CategoryCreateNestedOneWithoutProductInput
@@ -14845,7 +14856,7 @@ export namespace Prisma {
     description: string
     price: bigint | number
     stock: $Enums.ProductStock
-    imageUrl: string
+    imageUrl?: ProductCreateimageUrlInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     OrderProduct?: OrderProductUncheckedCreateNestedManyWithoutProductInput
@@ -14890,7 +14901,7 @@ export namespace Prisma {
     description?: StringFilter<"Product"> | string
     price?: BigIntFilter<"Product"> | bigint | number
     stock?: EnumProductStockFilter<"Product"> | $Enums.ProductStock
-    imageUrl?: StringFilter<"Product"> | string
+    imageUrl?: StringNullableListFilter<"Product">
     createdAt?: DateTimeFilter<"Product"> | Date | string
     updatedAt?: DateTimeFilter<"Product"> | Date | string
   }
@@ -14902,7 +14913,7 @@ export namespace Prisma {
     description: string
     price: bigint | number
     stock: $Enums.ProductStock
-    imageUrl: string
+    imageUrl?: ProductCreateimageUrlInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     brand: BrandCreateNestedOneWithoutProductInput
@@ -14919,7 +14930,7 @@ export namespace Prisma {
     description: string
     price: bigint | number
     stock: $Enums.ProductStock
-    imageUrl: string
+    imageUrl?: ProductCreateimageUrlInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     OrderProduct?: OrderProductUncheckedCreateNestedManyWithoutProductInput
@@ -14958,7 +14969,7 @@ export namespace Prisma {
     description: string
     price: bigint | number
     stock: $Enums.ProductStock
-    imageUrl: string
+    imageUrl?: ProductCreateimageUrlInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     brand: BrandCreateNestedOneWithoutProductInput
@@ -14975,7 +14986,7 @@ export namespace Prisma {
     description: string
     price: bigint | number
     stock: $Enums.ProductStock
-    imageUrl: string
+    imageUrl?: ProductCreateimageUrlInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     OrderProduct?: OrderProductUncheckedCreateNestedManyWithoutProductInput
@@ -15474,7 +15485,7 @@ export namespace Prisma {
     description: string
     price: bigint | number
     stock: $Enums.ProductStock
-    imageUrl: string
+    imageUrl?: ProductCreateimageUrlInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     brand: BrandCreateNestedOneWithoutProductInput
@@ -15492,7 +15503,7 @@ export namespace Prisma {
     description: string
     price: bigint | number
     stock: $Enums.ProductStock
-    imageUrl: string
+    imageUrl?: ProductCreateimageUrlInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -15553,7 +15564,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     price?: BigIntFieldUpdateOperationsInput | bigint | number
     stock?: EnumProductStockFieldUpdateOperationsInput | $Enums.ProductStock
-    imageUrl?: StringFieldUpdateOperationsInput | string
+    imageUrl?: ProductUpdateimageUrlInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneRequiredWithoutProductNestedInput
@@ -15571,7 +15582,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     price?: BigIntFieldUpdateOperationsInput | bigint | number
     stock?: EnumProductStockFieldUpdateOperationsInput | $Enums.ProductStock
-    imageUrl?: StringFieldUpdateOperationsInput | string
+    imageUrl?: ProductUpdateimageUrlInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -15645,7 +15656,7 @@ export namespace Prisma {
     description: string
     price: bigint | number
     stock: $Enums.ProductStock
-    imageUrl: string
+    imageUrl?: ProductCreateimageUrlInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -15657,7 +15668,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     price?: BigIntFieldUpdateOperationsInput | bigint | number
     stock?: EnumProductStockFieldUpdateOperationsInput | $Enums.ProductStock
-    imageUrl?: StringFieldUpdateOperationsInput | string
+    imageUrl?: ProductUpdateimageUrlInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: CategoryUpdateOneRequiredWithoutProductNestedInput
@@ -15674,7 +15685,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     price?: BigIntFieldUpdateOperationsInput | bigint | number
     stock?: EnumProductStockFieldUpdateOperationsInput | $Enums.ProductStock
-    imageUrl?: StringFieldUpdateOperationsInput | string
+    imageUrl?: ProductUpdateimageUrlInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     OrderProduct?: OrderProductUncheckedUpdateManyWithoutProductNestedInput
@@ -15689,7 +15700,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     price?: BigIntFieldUpdateOperationsInput | bigint | number
     stock?: EnumProductStockFieldUpdateOperationsInput | $Enums.ProductStock
-    imageUrl?: StringFieldUpdateOperationsInput | string
+    imageUrl?: ProductUpdateimageUrlInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -15703,7 +15714,7 @@ export namespace Prisma {
     description: string
     price: bigint | number
     stock: $Enums.ProductStock
-    imageUrl: string
+    imageUrl?: ProductCreateimageUrlInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -15715,7 +15726,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     price?: BigIntFieldUpdateOperationsInput | bigint | number
     stock?: EnumProductStockFieldUpdateOperationsInput | $Enums.ProductStock
-    imageUrl?: StringFieldUpdateOperationsInput | string
+    imageUrl?: ProductUpdateimageUrlInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneRequiredWithoutProductNestedInput
@@ -15732,7 +15743,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     price?: BigIntFieldUpdateOperationsInput | bigint | number
     stock?: EnumProductStockFieldUpdateOperationsInput | $Enums.ProductStock
-    imageUrl?: StringFieldUpdateOperationsInput | string
+    imageUrl?: ProductUpdateimageUrlInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     OrderProduct?: OrderProductUncheckedUpdateManyWithoutProductNestedInput
@@ -15747,7 +15758,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     price?: BigIntFieldUpdateOperationsInput | bigint | number
     stock?: EnumProductStockFieldUpdateOperationsInput | $Enums.ProductStock
-    imageUrl?: StringFieldUpdateOperationsInput | string
+    imageUrl?: ProductUpdateimageUrlInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -15761,7 +15772,7 @@ export namespace Prisma {
     description: string
     price: bigint | number
     stock: $Enums.ProductStock
-    imageUrl: string
+    imageUrl?: ProductCreateimageUrlInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -15773,7 +15784,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     price?: BigIntFieldUpdateOperationsInput | bigint | number
     stock?: EnumProductStockFieldUpdateOperationsInput | $Enums.ProductStock
-    imageUrl?: StringFieldUpdateOperationsInput | string
+    imageUrl?: ProductUpdateimageUrlInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     brand?: BrandUpdateOneRequiredWithoutProductNestedInput
@@ -15790,7 +15801,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     price?: BigIntFieldUpdateOperationsInput | bigint | number
     stock?: EnumProductStockFieldUpdateOperationsInput | $Enums.ProductStock
-    imageUrl?: StringFieldUpdateOperationsInput | string
+    imageUrl?: ProductUpdateimageUrlInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     OrderProduct?: OrderProductUncheckedUpdateManyWithoutProductNestedInput
@@ -15805,7 +15816,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     price?: BigIntFieldUpdateOperationsInput | bigint | number
     stock?: EnumProductStockFieldUpdateOperationsInput | $Enums.ProductStock
-    imageUrl?: StringFieldUpdateOperationsInput | string
+    imageUrl?: ProductUpdateimageUrlInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

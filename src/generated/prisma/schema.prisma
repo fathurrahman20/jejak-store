@@ -109,7 +109,7 @@ model Product {
   description String       @db.VarChar(255)
   price       BigInt       @db.BigInt
   stock       ProductStock
-  imageUrl    String       @map("image_url") @db.VarChar(255)
+  imageUrl    String[]     @map("image_url") @db.VarChar(255)
 
   OrderProduct OrderProduct[]
 
