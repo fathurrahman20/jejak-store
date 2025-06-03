@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "../../globalsLanding.css";
 import { Poppins } from "next/font/google";
+import { getUser } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "JejakStore | Auth",
@@ -17,13 +19,10 @@ export default async function DashboardLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    // <div className="flex min-h-screen w-full flex-col bg-muted/40">
-    //   <Sidebar />
-    //   <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
-    //     <Header />
-    <main className={`${poppins.className}`}>{children}</main>
-    //   </div>
-    // </div>
-  );
+  const { session, user } = await getUser();
+
+  if (session && user.role === "CUSTOMER") {
+    return redirect("/");
+  }
+  return <main className={`${poppins.className}`}>{children}</main>;
 }

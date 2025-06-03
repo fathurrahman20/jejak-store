@@ -1,10 +1,63 @@
 "use server";
 
-import { schemaSignUp } from "@/lib/schema";
+import { schemaSignIn, schemaSignUp } from "@/lib/schema";
 import { ActionResult } from "@/types";
 import prisma from "../../../../../lib/prisma";
 import bcrypt from "bcrypt";
+import { lucia } from "@/lib/auth";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+
+export async function signIn(
+  _: unknown,
+  formData: FormData
+): Promise<ActionResult> {
+  const validate = schemaSignIn.safeParse({
+    email: formData.get("email") as string,
+    password: formData.get("password") as string,
+  });
+
+  if (!validate.success) {
+    return {
+      error: validate.error.errors[0].message,
+    };
+  }
+
+  const existingUser = await prisma.user.findUnique({
+    where: {
+      email: validate.data.email,
+      role: "CUSTOMER",
+    },
+  });
+
+  if (!existingUser) {
+    return {
+      error: "Invalid email or password. Please try again.",
+    };
+  }
+
+  const isPasswordCorrect = bcrypt.compareSync(
+    validate.data.password,
+    existingUser.password
+  );
+
+  if (!isPasswordCorrect) {
+    return {
+      error: "Invalid email or password. Please try again.",
+    };
+  }
+
+  const session = await lucia.createSession(existingUser.id, {});
+  const sessionCookie = lucia.createSessionCookie(session.id);
+
+  (await cookies()).set(
+    sessionCookie.name,
+    sessionCookie.value,
+    sessionCookie.attributes
+  );
+
+  return redirect("/");
+}
 
 export async function signUp(
   _: unknown,
