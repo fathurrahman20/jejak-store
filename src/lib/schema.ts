@@ -66,3 +66,9 @@ export const schemaProductEdit = schemaProduct
     id: z.string({ required_error: "Product Id is required" }),
   })
   .omit({ imageUrl: true });
+
+export const schemaSignUp = schemaSignIn.extend({
+  name: z
+    .string({ required_error: "Name is required" })
+    .min(4, { message: "Name should have min 4 characters" }),
+});
