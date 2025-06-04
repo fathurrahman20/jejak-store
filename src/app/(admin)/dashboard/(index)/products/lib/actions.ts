@@ -51,11 +51,16 @@ export async function storeProduct(
         imageUrl: filenames,
       },
     });
-  } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
     console.log(error);
+    console.error("Insert Product Error:", error);
     return {
-      error: "Failed to insert data product",
+      error: error?.message || "Failed to insert data product",
     };
+    // return {
+    //   error: "Failed to insert data product",
+    // };
   }
 
   return redirect("/dashboard/products");

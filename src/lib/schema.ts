@@ -1,6 +1,11 @@
 import { z } from "zod";
 
-export const ALLOW_MIME_TYPES = ["image/jpg", "image/jpeg", "image/png"];
+export const ALLOW_MIME_TYPES = [
+  "image/jpg",
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+];
 
 export const schemaSignIn = z.object({
   email: z
