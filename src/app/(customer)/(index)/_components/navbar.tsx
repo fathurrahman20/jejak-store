@@ -8,7 +8,9 @@ export default async function Navbar() {
   return (
     <nav className="container max-w-[1130px] mx-auto flex items-center justify-between bg-[#0D5CD7] p-5 rounded-3xl">
       <div className="flex shrink-0">
-        <img src="/assets/logos/logo.svg" alt="icon" />
+        <Link href="/">
+          <img src="/assets/logos/logo.svg" alt="icon" />
+        </Link>
       </div>
       <NavbarLinks />
       <div className="flex items-center gap-3">

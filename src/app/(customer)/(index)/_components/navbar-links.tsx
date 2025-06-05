@@ -17,9 +17,9 @@ export default function NavbarLinks() {
       </li>
       <li
         className={`hover:font-bold hover:text-[#FFC736] transition-all duration-300 font-bold ${
-          pathname === "/shop" ? "text-[#FFC736]" : "text-white"
+          pathname === "/products" ? "text-[#FFC736]" : "text-white"
         }`}>
-        <Link href="#">Shop</Link>
+        <Link href="/products">Shop</Link>
       </li>
       <li
         className={`hover:font-bold hover:text-[#FFC736] transition-all duration-300 font-bold ${
