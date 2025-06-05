@@ -1,6 +1,7 @@
 import React from "react";
 import ProductCard from "../../_components/product-card";
 import { getProducts } from "@/app/(admin)/dashboard/(index)/products/lib/data";
+import { getImageUrl } from "@/lib/supabase";
 
 export default async function ProductList() {
   const products = await getProducts();
@@ -12,7 +13,7 @@ export default async function ProductList() {
           product={{
             categoryName: product.categoryName,
             id: product.id,
-            imageUrl: product.imageUrl,
+            imageUrl: getImageUrl(product.imageUrl, "products"),
             name: product.name,
             price: Number(product.price),
           }}
