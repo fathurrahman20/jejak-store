@@ -26,6 +26,7 @@ export async function getProducts() {
       select: {
         id: true,
         name: true,
+        slug: true,
         imageUrl: true,
         category: { select: { name: true } },
         price: true,

@@ -30,6 +30,7 @@ export default async function ProductList({
             key={`${product.name + product.id}`}
             product={{
               categoryName: product.category.name,
+              slug: product.slug,
               id: product.id,
               imageUrl: product.imageUrl,
               name: product.name,

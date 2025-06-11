@@ -25,6 +25,7 @@ export default function ProductList() {
         <ProductCard
           key={product.id}
           product={{
+            slug: product.slug,
             categoryName: product.categoryName,
             id: product.id,
             imageUrl: product.imageUrl,

@@ -32,6 +32,7 @@ export async function POST(request: Request) {
         id: true,
         imageUrl: true,
         name: true,
+        slug: true,
         category: {
           select: { name: true },
         },
@@ -42,6 +43,7 @@ export async function POST(request: Request) {
     const response: TProduct[] = products.map((product) => {
       return {
         id: product.id,
+        slug: product.slug,
         imageUrl: getImageUrl(product.imageUrl[0], "products"),
         name: product.name,
         categoryName: product.category.name,
