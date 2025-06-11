@@ -1,19 +1,33 @@
+"use client";
+
 import React from "react";
 import ProductCard from "../../_components/product-card";
-import { getProducts } from "@/app/(admin)/dashboard/(index)/products/lib/data";
-import { getImageUrl } from "@/lib/supabase";
+import { useQuery } from "@tanstack/react-query";
+import { fetchProducts } from "../lib/data";
+import { useFilter } from "@/hooks/useFilter";
 
-export default async function ProductList() {
-  const products = await getProducts();
+export default function ProductList() {
+  const { filter } = useFilter();
+  const { data: products, isLoading } = useQuery({
+    queryKey: ["products", filter],
+    queryFn: () => fetchProducts(filter),
+  });
+  if (isLoading) {
+    return (
+      <div className="grid grid-cols-3 gap-[30px]">
+        <p>Loading...</p>
+      </div>
+    );
+  }
   return (
     <div className="grid grid-cols-3 gap-[30px]">
-      {products.map((product) => (
+      {products?.map((product) => (
         <ProductCard
-          key={`${product.name + product.id}`}
+          key={product.id}
           product={{
             categoryName: product.categoryName,
             id: product.id,
-            imageUrl: getImageUrl(product.imageUrl, "products"),
+            imageUrl: product.imageUrl,
             name: product.name,
             price: Number(product.price),
           }}

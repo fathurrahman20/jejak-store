@@ -1,6 +1,22 @@
-import React from "react";
+"use client";
+
+import { useFilter } from "@/hooks/useFilter";
+import React, { useEffect, useState } from "react";
 
 export default function SearchBar() {
+  const { setFilter } = useFilter();
+  const [query, setQuery] = useState<string>("");
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const debounceInput = setTimeout(() => {
+      setFilter({
+        search: query,
+      });
+    }, 1500);
+    return () => clearTimeout(debounceInput);
+  }, [query]);
+
   return (
     <div
       id="title"
@@ -28,6 +44,7 @@ export default function SearchBar() {
           type="text"
           id=""
           name=""
+          onChange={(e) => setQuery(e.target.value)}
           className="appearance-none outline-none w-full placeholder:text-[#616369] placeholder:font-normal font-semibold text-black"
           placeholder="Search product by name, brand, category"
         />
