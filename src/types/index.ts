@@ -18,3 +18,5 @@ export type TProduct = {
   categoryName: string;
   price: number;
 };
+
+export type TCart = TProduct & { quantity: number };

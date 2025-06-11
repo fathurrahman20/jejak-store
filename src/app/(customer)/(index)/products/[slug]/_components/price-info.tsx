@@ -1,8 +1,10 @@
 "use client";
 
+import { useCart } from "@/hooks/useCart";
 import { formatToRupiah } from "@/lib/utils";
-import { TProduct } from "@/types";
+import { TCart, TProduct } from "@/types";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 interface PriceInfoProp {
@@ -11,6 +13,20 @@ interface PriceInfoProp {
 }
 
 export default function PriceInfo({ item, isLogIn }: PriceInfoProp) {
+  const { addProduct } = useCart();
+  const router = useRouter();
+
+  const handleCheckout = () => {
+    const newCartProduct: TCart = {
+      ...item,
+      quantity: 1,
+    };
+
+    addProduct(newCartProduct);
+
+    router.push("/carts");
+  };
+
   return (
     <div className="w-[302px] flex flex-col shrink-0 gap-5 h-fit">
       <div className="w-full bg-white border border-[#E5E5E5] flex flex-col gap-[30px] p-[30px] rounded-3xl">
@@ -44,8 +60,10 @@ export default function PriceInfo({ item, isLogIn }: PriceInfoProp) {
           <button
             disabled={!isLogIn}
             type="button"
-            // onClick={checkout}
-            className="p-[12px_24px] bg-[#0D5CD7] rounded-full text-center font-semibold text-white disabled:opacity-60">
+            onClick={handleCheckout}
+            className={`p-[12px_24px] bg-[#0D5CD7] rounded-full text-center font-semibold text-white ${
+              isLogIn ? "cursor-pointer opacity-100" : "opacity-60"
+            }`}>
             Add to Cart
           </button>
           <Link
