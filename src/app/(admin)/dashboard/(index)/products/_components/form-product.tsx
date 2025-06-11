@@ -175,7 +175,7 @@ export default function FormProduct({
                   </div>
                 </CardContent>
               </Card>
-              <UploadImages photos={data?.imageUrl} />
+              <UploadImages />
             </div>
           </div>
           <div className="flex items-center justify-center gap-2 md:hidden">
