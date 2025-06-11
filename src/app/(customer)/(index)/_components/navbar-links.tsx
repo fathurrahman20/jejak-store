@@ -6,7 +6,7 @@ import React from "react";
 
 export default function NavbarLinks() {
   const pathname = usePathname();
-  console.log(`Ini Pathname: ${pathname}`);
+
   return (
     <ul className="flex items-center gap-[30px]">
       <li

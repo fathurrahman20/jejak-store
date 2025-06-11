@@ -9,7 +9,7 @@ import { Upload } from "lucide-react";
 import Image from "next/image";
 import React, { ChangeEvent, useRef } from "react";
 
-export default function UploadImages({ photos }: { photos?: string[] }) {
+export default function UploadImages() {
   const ref = useRef<HTMLInputElement>(null);
   const thumbnailRef = useRef<HTMLImageElement>(null);
   const imageFirstRef = useRef<HTMLImageElement>(null);
@@ -20,7 +20,6 @@ export default function UploadImages({ photos }: { photos?: string[] }) {
       ref.current.click();
     }
   };
-  console.log(`Foto Produck: ${photos}`);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (

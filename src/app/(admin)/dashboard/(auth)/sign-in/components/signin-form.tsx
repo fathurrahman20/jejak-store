@@ -37,8 +37,6 @@ export default function SignInForm({
 }: React.ComponentPropsWithoutRef<"div">) {
   const [state, formAction] = useActionState(SignIn, initialState);
 
-  console.log(`Statenya: ${JSON.stringify(state)}`);
-
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
