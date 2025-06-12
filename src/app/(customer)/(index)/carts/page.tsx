@@ -2,8 +2,15 @@ import React from "react";
 import Navbar from "../_components/navbar";
 import CartProducts from "./_components/cart-product";
 import CheckoutForm from "./_components/checkout-form";
+import { getUser } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
-export default function CartsPage() {
+export default async function CartsPage() {
+  const { session } = await getUser();
+
+  if (!session) {
+    return redirect("/");
+  }
   return (
     <>
       <header className="bg-[#EFF3FA] pt-[30px] h-[480px] -mb-[310px]">
