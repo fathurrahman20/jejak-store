@@ -77,3 +77,23 @@ export const schemaSignUp = schemaSignIn.extend({
     .string({ required_error: "Name is required" })
     .min(4, { message: "Name should have min 4 characters" }),
 });
+
+export const schemaShippingAddress = z.object({
+  name: z
+    .string({ required_error: "Name is required" })
+    .min(3, { message: "Name should have 3 minimal characters" }),
+  address: z
+    .string({ required_error: "Address is required" })
+    .min(5, { message: "Address should have 5 minimal characters" }),
+  city: z
+    .string({ required_error: "City is required" })
+    .min(5, { message: "City should have 5 minimal characters" }),
+  postalCode: z
+    .string({ required_error: "Postal Code is required" })
+    .min(5, { message: "Postal Code should have 5 minimal characters" }),
+  notes: z.string().nullable(),
+  phone: z
+    .string({ required_error: "Phone is required" })
+    .min(11, { message: "Phone should have 11 minimal characters" })
+    .max(13, { message: "Phone should have 13 maximal characters" }),
+});

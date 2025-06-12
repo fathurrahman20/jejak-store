@@ -5,8 +5,8 @@ import { createJSONStorage, persist } from "zustand/middleware";
 interface CartState {
   products: TCart[];
   addProduct: (cart: TCart) => void;
-  increaseProduct: (id: string) => void;
-  decreaseProduct: (id: string) => void;
+  increaseQuantity: (id: string) => void;
+  decreaseQuantity: (id: string) => void;
   removeProduct: (id: string) => void;
 }
 
@@ -21,7 +21,7 @@ export const useCart = create<CartState>()(
             cart,
           ],
         }),
-      increaseProduct: (id) => {
+      increaseQuantity: (id) => {
         const newProducts = get().products.map((item) =>
           item.id === id ? { ...item, quantity: item.quantity + 1 } : item
         );
@@ -30,7 +30,7 @@ export const useCart = create<CartState>()(
           products: newProducts,
         });
       },
-      decreaseProduct: (id) => {
+      decreaseQuantity: (id) => {
         const newProducts = get().products.map((item) =>
           item.id === id ? { ...item, quantity: item.quantity - 1 } : item
         );
