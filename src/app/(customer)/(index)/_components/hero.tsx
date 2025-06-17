@@ -46,7 +46,7 @@ export default function Hero() {
           <div className="flex items-center gap-3">
             <a
               href=""
-              className="p-[18px_24px] rounded-full font-semibold bg-[#0D5CD7] text-white">
+              className="p-[18px_24px] rounded-full font-semibold bg-[#3A4F41] text-white">
               Tambah ke Keranjang
             </a>
             <a

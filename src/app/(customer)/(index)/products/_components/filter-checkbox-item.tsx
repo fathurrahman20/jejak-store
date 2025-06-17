@@ -80,7 +80,7 @@ export default function FilterCheckboxItem({
         name=""
         value={id}
         onChange={handleChange}
-        className="w-6 h-6 flex shrink-0 appearance-none checked:border-[3px] checked:border-solid checked:border-white rounded-md checked:bg-[#0D5CD7] ring-1 ring-[#0D5CD7]"
+        className="w-6 h-6 flex shrink-0 appearance-none checked:border-[3px] checked:border-solid checked:border-white rounded-md checked:bg-[#3A4F41] ring-1 ring-[#3A4F41]"
       />
       <span>{label ? label : value}</span>
     </label>

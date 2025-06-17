@@ -31,7 +31,7 @@ export default function CartProducts() {
           </div>
           <div className="w-[150px] flex flex-col gap-1">
             <p className="text-sm text-[#616369]">Harga</p>
-            <p className="font-semibold text-[#0D5CD7] leading-[22px]">
+            <p className="font-semibold text-[#3A4F41] leading-[22px]">
               {formatToRupiah(cart.price)}
             </p>
           </div>
@@ -44,7 +44,7 @@ export default function CartProducts() {
                 className="w-6 h-6 flex shrink-0 cursor-pointer">
                 <img src="assets/icons/minus-cirlce.svg" alt="minus" />
               </button>
-              <p className="text-[#0D5CD7] font-semibold leading-[22px]">
+              <p className="text-[#3A4F41] font-semibold leading-[22px]">
                 {cart.quantity}
               </p>
               <button
@@ -57,7 +57,7 @@ export default function CartProducts() {
           </div>
           <div className="w-[150px] flex flex-col gap-1">
             <p className="text-sm text-[#616369]">Total</p>
-            <p className="font-semibold text-[#0D5CD7] leading-[22px]">
+            <p className="font-semibold text-[#3A4F41] leading-[22px]">
               {formatToRupiah(cart.price * cart.quantity)}
             </p>
           </div>

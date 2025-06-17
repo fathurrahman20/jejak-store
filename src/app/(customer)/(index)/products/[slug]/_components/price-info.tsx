@@ -61,7 +61,7 @@ export default function PriceInfo({ item, isLogIn }: PriceInfoProp) {
             disabled={!isLogIn}
             type="button"
             onClick={handleCheckout}
-            className={`p-[12px_24px] bg-[#0D5CD7] rounded-full text-center font-semibold text-white ${
+            className={`p-[12px_24px] bg-[#3A4F41] rounded-full text-center font-semibold text-white ${
               isLogIn ? "cursor-pointer opacity-100" : "opacity-60"
             }`}>
             Add to Cart

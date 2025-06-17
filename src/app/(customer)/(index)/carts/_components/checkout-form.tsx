@@ -18,7 +18,7 @@ function SubmitButton({ grandTotal }: { grandTotal: number }) {
     <button
       type="submit"
       disabled={pending && grandTotal > 0}
-      className={`p-[12px_24px] bg-[#0D5CD7] rounded-full text-center font-semibold text-white ${
+      className={`p-[12px_24px] bg-[#3A4F41] rounded-full text-center font-semibold text-white ${
         grandTotal > 0 ? "opacity-100 cursor-pointer" : "opacity-60"
       }`}>
       {pending ? "Memproses via Xendit..." : "Lanjutkan Pembayaran"}
@@ -183,7 +183,7 @@ export default function CheckoutForm() {
           </div>
           <div className="flex flex-col gap-1">
             <p className="font-semibold">Total Belanja</p>
-            <p className="font-bold text-[32px] leading-[48px] underline text-[#0D5CD7]">
+            <p className="font-bold text-[32px] leading-[48px] underline text-[#3A4F41]">
               {formatToRupiah(grandTotal)}
             </p>
           </div>

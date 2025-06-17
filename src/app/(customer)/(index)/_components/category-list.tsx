@@ -23,7 +23,7 @@ export default async function CategoryList() {
             key={`${category.id} + ${category.slug}}`}
             className="categories-card">
             <div className="bg-white flex items-center gap-[14px] p-5 rounded-[20px] ring-1 ring-[#E5E5E5] hover:ring-2 hover:ring-[#FFC736] transition-all duration-300 w-full">
-              <div className="w-12 h-12 flex shrink-0 rounded-full bg-[#0D5CD7] items-center justify-center overflow-hidden">
+              <div className="w-12 h-12 flex shrink-0 rounded-full bg-[#3A4F41] items-center justify-center overflow-hidden">
                 <img src="/assets/icons/mobile.svg" alt="icon" />
               </div>
               <div className="flex flex-col gap-[2px]">

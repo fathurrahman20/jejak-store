@@ -7,7 +7,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 export default async function Navbar() {
   const { session, user } = await getUser();
   return (
-    <nav className="container max-w-[1130px] mx-auto flex items-center justify-between bg-[#0D5CD7] p-5 rounded-3xl">
+    <nav className="container max-w-[1130px] mx-auto flex items-center justify-between bg-[#3A4F41] p-5 rounded-3xl">
       <div className="flex shrink-0">
         <Link href="/">
           <img src="/assets/logos/logo.svg" alt="icon" />
