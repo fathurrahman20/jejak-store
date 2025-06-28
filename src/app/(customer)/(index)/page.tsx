@@ -4,6 +4,9 @@ import CategoryList from "./_components/category-list";
 import ProductList from "./_components/product-list";
 import BrandList from "./_components/brand-list";
 import Hero from "./_components/hero";
+import ProductCardSkeleton from "./_components/product-card-skeleton";
+import CategoryListSkeleton from "./_components/categoty-list-skeleton";
+import BrandListSkeleton from "./_components/brand-list-skeleton";
 
 export default function LandingPage() {
   return (
@@ -15,11 +18,10 @@ export default function LandingPage() {
       <section
         id="content"
         className="container max-w-[1130px] mx-auto flex flex-col gap-[50px] pt-[50px] pb-[100px]">
-        {/* TODO: Change Loading with skeleton */}
-        <Suspense fallback={<span>Loading...</span>}>
+        <Suspense fallback={<CategoryListSkeleton />}>
           <CategoryList />
         </Suspense>
-        <Suspense fallback={<span>Loading...</span>}>
+        <Suspense fallback={<ProductCardSkeleton />}>
           {/* TODO: Change order with most picked */}
           <ProductList
             title={
@@ -29,10 +31,10 @@ export default function LandingPage() {
             }
           />
         </Suspense>
-        <Suspense fallback={<span>Loading...</span>}>
+        <Suspense fallback={<BrandListSkeleton />}>
           <BrandList />
         </Suspense>
-        <Suspense fallback={<span>Loading...</span>}>
+        <Suspense fallback={<ProductCardSkeleton />}>
           {/* TODO: Change order with current added */}
           <ProductList
             title={
