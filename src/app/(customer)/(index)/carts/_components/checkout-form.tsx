@@ -17,10 +17,13 @@ function SubmitButton({ grandTotal }: { grandTotal: number }) {
   return (
     <button
       type="submit"
-      disabled={pending && grandTotal > 0}
-      className={`p-[12px_24px] bg-[#3A4F41] rounded-full text-center font-semibold text-white ${
-        grandTotal > 0 ? "opacity-100 cursor-pointer" : "opacity-60"
-      }`}>
+      disabled={pending || grandTotal === 0}
+      className={`p-[12px_24px] bg-[#3A4F41] rounded-full text-center font-semibold text-white transition-all ${
+        grandTotal > 0
+          ? "opacity-100 cursor-pointer hover:bg-[#2c3d32]"
+          : "opacity-60 cursor-not-allowed"
+      }`}
+    >
       {pending ? "Memproses via Xendit..." : "Lanjutkan Pembayaran"}
     </button>
   );
@@ -32,7 +35,7 @@ export default function CheckoutForm() {
   const grandTotal = useMemo(() => {
     return products.reduce(
       (prev, curr) => prev + curr.price * curr.quantity,
-      0
+      0,
     );
   }, [products]);
 
@@ -41,16 +44,24 @@ export default function CheckoutForm() {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [state, formAction] = useActionState(storeOrderParams, initialState);
+
+  // Jika keranjang kosong, jangan render form (opsional, tapi bagus untuk UX)
+  if (products.length === 0) return null;
+
   return (
     <form
       action={formAction}
       id="checkout-info"
-      className="container max-w-[1130px] mx-auto flex justify-between gap-5 mt-[50px] pb-[100px]">
-      <div className="w-[650px] flex flex-col shrink-0 gap-4 h-fit">
-        <h2 className="font-bold text-2xl leading-[34px]">
+      // CHANGE: flex-col di mobile, lg:flex-row di desktop. Padding px-4.
+      className="container max-w-[1130px] mx-auto flex flex-col lg:flex-row justify-between gap-8 lg:gap-5 mt-[50px] pb-[100px] px-4 md:px-8 xl:px-0"
+    >
+      {/* Form Section */}
+      {/* CHANGE: w-full di mobile, w-[650px] di desktop */}
+      <div className="w-full lg:w-[650px] flex flex-col shrink-0 gap-4 h-fit">
+        <h2 className="font-bold text-xl md:text-2xl leading-[34px]">
           Alamat Pengiriman Anda
         </h2>
-        <div className="flex flex-col gap-5 p-[30px] rounded-3xl border border-[#E5E5E5] bg-white">
+        <div className="flex flex-col gap-5 p-5 md:p-[30px] rounded-3xl border border-[#E5E5E5] bg-white">
           <div className="flex items-center gap-[10px] rounded-full border border-[#E5E5E5] p-[12px_20px] focus-within:ring-2 focus-within:ring-[#FFC736] transition-all duration-300">
             <div className="flex shrink-0">
               <img src="assets/icons/profile-circle.svg" alt="icon" />
@@ -59,7 +70,7 @@ export default function CheckoutForm() {
               type="text"
               id=""
               name="name"
-              className="appearance-none outline-none w-full placeholder:text-[#616369] placeholder:font-normal font-semibold text-black"
+              className="appearance-none outline-none w-full placeholder:text-[#616369] placeholder:font-normal font-semibold text-black text-sm md:text-base"
               placeholder="Tulis nama lengkap Anda"
               required
             />
@@ -72,13 +83,16 @@ export default function CheckoutForm() {
               type="text"
               id=""
               name="address"
-              className="appearance-none outline-none w-full placeholder:text-[#616369] placeholder:font-normal font-semibold text-black"
+              className="appearance-none outline-none w-full placeholder:text-[#616369] placeholder:font-normal font-semibold text-black text-sm md:text-base"
               placeholder="Tulis alamat rumah Anda"
               required
             />
           </div>
-          <div className="flex items-center gap-[30px]">
-            <div className="flex items-center gap-[10px] rounded-full border border-[#E5E5E5] p-[12px_20px] focus-within:ring-2 focus-within:ring-[#FFC736] transition-all duration-300">
+
+          {/* City & Zip Code */}
+          {/* CHANGE: stack vertical di mobile */}
+          <div className="flex flex-col md:flex-row items-center gap-5 md:gap-[30px]">
+            <div className="w-full flex items-center gap-[10px] rounded-full border border-[#E5E5E5] p-[12px_20px] focus-within:ring-2 focus-within:ring-[#FFC736] transition-all duration-300">
               <div className="flex shrink-0">
                 <img src="assets/icons/global.svg" alt="icon" />
               </div>
@@ -86,12 +100,12 @@ export default function CheckoutForm() {
                 type="text"
                 id=""
                 name="city"
-                className="appearance-none outline-none w-full placeholder:text-[#616369] placeholder:font-normal font-semibold text-black"
+                className="appearance-none outline-none w-full placeholder:text-[#616369] placeholder:font-normal font-semibold text-black text-sm md:text-base"
                 placeholder="Kota"
                 required
               />
             </div>
-            <div className="flex items-center gap-[10px] rounded-full border border-[#E5E5E5] p-[12px_20px] focus-within:ring-2 focus-within:ring-[#FFC736] transition-all duration-300">
+            <div className="w-full flex items-center gap-[10px] rounded-full border border-[#E5E5E5] p-[12px_20px] focus-within:ring-2 focus-within:ring-[#FFC736] transition-all duration-300">
               <div className="flex shrink-0">
                 <img src="assets/icons/location.svg" alt="icon" />
               </div>
@@ -99,12 +113,13 @@ export default function CheckoutForm() {
                 type="number"
                 id=""
                 name="postalCode"
-                className="appearance-none outline-none w-full placeholder:text-[#616369] placeholder:font-normal font-semibold text-black"
+                className="appearance-none outline-none w-full placeholder:text-[#616369] placeholder:font-normal font-semibold text-black text-sm md:text-base"
                 placeholder="Kode Pos"
                 required
               />
             </div>
           </div>
+
           <div className="flex items-start gap-[10px] rounded-[20px] border border-[#E5E5E5] p-[12px_20px] focus-within:ring-2 focus-within:ring-[#FFC736] transition-all duration-300">
             <div className="flex shrink-0">
               <img src="assets/icons/note.svg" alt="icon" />
@@ -112,7 +127,7 @@ export default function CheckoutForm() {
             <textarea
               name="notes"
               id=""
-              className="appearance-none outline-none w-full placeholder:text-[#616369] placeholder:font-normal font-semibold text-black resize-none"
+              className="appearance-none outline-none w-full placeholder:text-[#616369] placeholder:font-normal font-semibold text-black resize-none text-sm md:text-base"
               rows={6}
               placeholder="Catatan tambahan untuk kurir"
               required
@@ -126,17 +141,22 @@ export default function CheckoutForm() {
               type="tel"
               id=""
               name="phone"
-              className="appearance-none outline-none w-full placeholder:text-[#616369] placeholder:font-normal font-semibold text-black"
+              className="appearance-none outline-none w-full placeholder:text-[#616369] placeholder:font-normal font-semibold text-black text-sm md:text-base"
               placeholder="Tulis nomor telepon atau WhatsApp Anda"
               required
             />
           </div>
         </div>
       </div>
+
+      {/* Summary Section */}
+      {/* CHANGE: flex-1 untuk mengisi sisa ruang di desktop */}
       <div className="flex flex-1 flex-col shrink-0 gap-4 h-fit">
-        <h2 className="font-bold text-2xl leading-[34px]">Detail Pembayaran</h2>
-        <div className="w-full bg-white border border-[#E5E5E5] flex flex-col gap-[30px] p-[30px] rounded-3xl">
-          <a href="">
+        <h2 className="font-bold text-xl md:text-2xl leading-[34px]">
+          Detail Pembayaran
+        </h2>
+        <div className="w-full bg-white border border-[#E5E5E5] flex flex-col gap-[30px] p-5 md:p-[30px] rounded-3xl">
+          <a href="#">
             <div className="w-full bg-white border border-[#E5E5E5] flex items-center justify-between gap-2 p-5 rounded-3xl">
               <div className="flex items-center gap-[10px]">
                 <div className="w-12 h-12 flex shrink-0 rounded-full bg-[#FFC736] items-center justify-center overflow-hidden">
@@ -190,8 +210,9 @@ export default function CheckoutForm() {
           <div className="flex flex-col gap-3">
             <SubmitButton grandTotal={grandTotal} />
             <a
-              href=""
-              className="p-[12px_24px] bg-white rounded-full text-center font-semibold border border-[#E5E5E5]">
+              href="#"
+              className="p-[12px_24px] bg-white rounded-full text-center font-semibold border border-[#E5E5E5] hover:bg-gray-50"
+            >
               Hubungi Penjual
             </a>
           </div>

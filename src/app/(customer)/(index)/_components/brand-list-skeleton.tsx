@@ -5,12 +5,9 @@ export default function BrandListSkeleton() {
   const skeletons = [0, 1, 2, 3, 4];
   return (
     <>
-      <div className="grid grid-cols-5 gap-[30px]">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-[30px]">
         {skeletons.map((index) => (
-          <Skeleton
-            key={index}
-            className="h-[100px] w-[200px] rounded-[20px]"
-          />
+          <Skeleton key={index} className="h-[100px] w-full rounded-[20px]" />
         ))}
       </div>
     </>

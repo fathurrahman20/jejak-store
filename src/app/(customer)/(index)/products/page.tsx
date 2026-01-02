@@ -7,21 +7,28 @@ import FilterBrands from "./_components/filter-brands";
 import FilterLocation from "./_components/filter-location";
 import FilterCategories from "./_components/filter-categories";
 import ProductList from "./_components/product-list";
+import CatalogLayout from "./_components/catalog-layout"; // Import komponen baru
 
 export default function ProductsPage() {
   return (
     <>
-      <header className="bg-[#EFF3FA] pt-[30px] h-[351px] -mb-[181px]">
-        <Navbar />
+      <header className="bg-[#EFF3FA] pt-[30px] h-auto pb-10 md:h-[351px] md:-mb-[181px] md:pb-0">
+        <div className="px-3 md:px-6 lg:px-8">
+          <Navbar />
+        </div>
       </header>
       <SearchBar />
-      <div
-        id="catalog"
-        className="container max-w-[1130px] mx-auto flex gap-[30px] mt-[50px] pb-[100px]">
+
+      {/* Menggunakan Client Component Wrapper */}
+      <CatalogLayout>
+        {/* Child 1: Bagian Filter */}
         <form
           action=""
-          className="flex flex-1 flex-col bg-white p-[30px] gap-5 h-fit border border-[#E5E5E5] rounded-[30px]">
-          <h2 className="font-bold text-2xl leading-[34px]">Filters</h2>
+          className="flex flex-col bg-white p-5 md:p-[30px] gap-5 h-fit border border-[#E5E5E5] rounded-[30px]"
+        >
+          <h2 className="font-bold text-xl md:text-2xl leading-[34px]">
+            Filters
+          </h2>
           <FilterPrice />
           <hr className="border-[#E5E5E5]" />
           <FilterStock />
@@ -32,11 +39,10 @@ export default function ProductsPage() {
           <hr className="border-[#E5E5E5]" />
           <FilterCategories />
         </form>
-        <div className="w-[780px] flex flex-col bg-white p-[30px] gap-[30px] h-fit border border-[#E5E5E5] rounded-[30px]">
-          <h2 className="font-bold text-2xl leading-[34px]">Products</h2>
-          <ProductList />
-        </div>
-      </div>
+
+        {/* Child 2: Bagian Produk (Wrapper div-nya sudah dihandle di CatalogLayout) */}
+        <ProductList />
+      </CatalogLayout>
     </>
   );
 }

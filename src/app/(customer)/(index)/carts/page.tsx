@@ -13,14 +13,19 @@ export default async function CartsPage() {
   }
   return (
     <>
-      <header className="bg-[#EFF3FA] pt-[30px] h-[480px] -mb-[310px]">
-        <Navbar />
+      {/* CHANGE: h-auto pb-10 di mobile, fixed height di desktop */}
+      <header className="bg-[#EFF3FA] pt-[30px] h-auto pb-10 md:h-[480px] md:-mb-[310px] md:pb-0">
+        <div className="px-3 md:px-6 lg:px-8">
+          <Navbar />
+        </div>
       </header>
       <div
         id="title"
-        className="container max-w-[1130px] mx-auto flex items-center justify-between">
-        <div className="flex flex-col gap-5">
-          <div className="flex gap-5 items-center">
+        // CHANGE: px-4 padding horizontal & margin top responsive
+        className="container max-w-[1130px] mx-auto flex flex-col md:flex-row items-start md:items-center justify-between px-4 md:px-8 xl:px-0 gap-5 md:gap-0 mt-5 md:mt-0"
+      >
+        <div className="flex flex-col gap-3 md:gap-5">
+          <div className="flex gap-3 md:gap-5 items-center">
             <a className="page text-sm text-[#6A7789] last-of-type:text-black">
               Shop
             </a>
@@ -33,7 +38,9 @@ export default async function CartsPage() {
               Details
             </a>
           </div>
-          <h1 className="font-bold text-4xl leading-9">Keranjang Saya</h1>
+          <h1 className="font-bold text-3xl md:text-4xl leading-9">
+            Keranjang Saya
+          </h1>
         </div>
       </div>
       <CartProducts />

@@ -231,7 +231,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "D:\\portfolio\\jejak-store\\src\\generated\\prisma",
+      "value": "C:\\portfolio\\jejak-store\\src\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -245,12 +245,11 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "D:\\portfolio\\jejak-store\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\portfolio\\jejak-store\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
-    "schemaEnvPath": "../../../.env"
+    "rootEnvPath": null
   },
   "relativePath": "../../../prisma",
   "clientVersion": "6.6.0",
@@ -259,7 +258,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
+  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {

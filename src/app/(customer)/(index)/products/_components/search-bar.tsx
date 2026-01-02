@@ -20,9 +20,11 @@ export default function SearchBar() {
   return (
     <div
       id="title"
-      className="container max-w-[1130px] mx-auto flex items-center justify-between">
-      <div className="flex flex-col gap-5">
-        <div className="flex gap-5 items-center">
+      // CHANGE: flex-col di mobile, md:flex-row di desktop. Padding px-4.
+      className="container max-w-[1130px] mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-5 px-4 md:px-8 xl:px-0"
+    >
+      <div className="flex flex-col gap-3 md:gap-5">
+        <div className="flex gap-3 md:gap-5 items-center pt-3 md:pt-0">
           <a className="page text-sm text-[#6A7789] last-of-type:text-black">
             Shop
           </a>
@@ -35,18 +37,23 @@ export default function SearchBar() {
             Products
           </a>
         </div>
-        <h1 className="font-bold text-4xl leading-9">Our Product Catalog</h1>
+        {/* CHANGE: Text size responsive */}
+        <h1 className="font-bold text-3xl md:text-4xl leading-9">
+          Our Product Catalog
+        </h1>
       </div>
       <form
         action=""
-        className="max-w-[480px] w-full bg-white flex items-center gap-[10px] rounded-full border border-[#E5E5E5] p-[12px_20px] focus-within:ring-2 focus-within:ring-[#FFC736] transition-all duration-300">
+        // CHANGE: max-w full di mobile
+        className="w-full md:max-w-[480px] bg-white flex items-center gap-[10px] rounded-full border border-[#E5E5E5] p-[12px_20px] focus-within:ring-2 focus-within:ring-[#FFC736] transition-all duration-300"
+      >
         <input
           type="text"
           id=""
           name=""
           onChange={(e) => setQuery(e.target.value)}
-          className="appearance-none outline-none w-full placeholder:text-[#616369] placeholder:font-normal font-semibold text-black"
-          placeholder="Search product by name, brand, category"
+          className="appearance-none outline-none w-full placeholder:text-[#616369] placeholder:font-normal font-semibold text-black text-sm md:text-base"
+          placeholder="Search product by name..."
         />
         <button type="submit" className="flex shrink-0">
           <img src="/assets/icons/search-normal.svg" alt="icon" />
